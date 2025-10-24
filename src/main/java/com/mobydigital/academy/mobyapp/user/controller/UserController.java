@@ -1,17 +1,15 @@
 package com.mobydigital.academy.mobyapp.user.controller;
 
 import java.util.List;
+
+import com.mobydigital.academy.mobyapp.user.dto.PictureDto;
+import com.mobydigital.academy.mobyapp.user.model.User;
 import coms.dto.UserDTO;
 import coms.dto.UserReferenceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.mobydigital.academy.mobyapp.user.exception.ReferentNotFoundException;
 import com.mobydigital.academy.mobyapp.user.exception.TalentPartnerNotFoundException;
 import com.mobydigital.academy.mobyapp.user.exception.TechnologyNotFoundException;
@@ -71,6 +69,15 @@ public class UserController {
         return new ResponseEntity<>(updatedUserResult, HttpStatus.OK);
     }
 
+    @PatchMapping("/picture/{email}")
+    public ResponseEntity<UserDTO> updateUserProfilePic(
+            @PathVariable String email,
+            @RequestBody UserDTO profilePicture
+    ) {
+
+        UserDTO updated = userService.updatePicture(email, profilePicture.getProfilePicture());
+        return new ResponseEntity<>(updated, HttpStatus.OK);
+    }
 
     @GetMapping("/fullName/{email}")
     public ResponseEntity<String> getUserFullName(@PathVariable String email) throws UserNotFoundException{

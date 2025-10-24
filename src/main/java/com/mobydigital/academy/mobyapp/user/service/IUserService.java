@@ -16,5 +16,6 @@ public interface IUserService {
     List<UserReferenceDTO> getByTechnology(String technology)  throws TechnologyNotFoundException;;
     UserDTO findUserByEmail(String id) throws UserNotFoundException;
     UserDTO updateUser(String id, UserDTO updatedUser) throws IllegalArgumentException;
+    UserDTO updatePicture(String id, String pictureUrl) throws IllegalArgumentException;
     String getFullNameByEmail(String email) throws UserNotFoundException;
 }

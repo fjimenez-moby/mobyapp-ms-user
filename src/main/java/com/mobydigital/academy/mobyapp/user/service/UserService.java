@@ -10,6 +10,7 @@ import com.mobydigital.academy.mobyapp.user.model.AirtableUserResponse;
 import coms.dto.UserDTO;
 import coms.dto.UserReferenceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -18,10 +19,6 @@ import com.mobydigital.academy.mobyapp.user.exception.TalentPartnerNotFoundExcep
 import com.mobydigital.academy.mobyapp.user.exception.TechnologyNotFoundException;
 import com.mobydigital.academy.mobyapp.user.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 
 @Service
 public class UserService implements IUserService{
@@ -92,6 +89,47 @@ public class UserService implements IUserService{
         } catch (Exception e) {
             logger.severe("Fallo general de comunicación con Airtable: " + e.getMessage());
             throw new RuntimeException("Fallo en la comunicación con el microservicio de Airtable: " + e.getMessage(), e);
+        }
+    }
+    @Override
+    public UserDTO updatePicture(String email, String pictureUrl) throws IllegalArgumentException {
+        String urlUpdate = urlBase + "user/newPicture?email={email}";
+
+        Map<String, String> uriVariables = new HashMap<>();
+        uriVariables.put("email", email);
+
+        // Construimos el cuerpo con solo la propiedad a actualizar
+
+        HttpHeaders h = new HttpHeaders();
+        h.setContentType(MediaType.APPLICATION_JSON);
+        Map<String, String> body = Map.of("pictureUrl", pictureUrl);
+        HttpEntity<Map<String,String>> req = new HttpEntity<>(body, h);
+
+        try {
+            ResponseEntity<AirtableUserResponse> response = restTemplate.exchange(
+                    urlUpdate,
+                    HttpMethod.PATCH,
+                    req,
+                    AirtableUserResponse.class,
+                    uriVariables
+            );
+
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                AirtableUserResponse airtableResponse = response.getBody();
+                return airtableMapper.fromAirtable(airtableResponse);
+            }
+            throw new RuntimeException("El microservicio devolvió un código 2xx, pero el cuerpo está vacío.");
+
+        } catch (HttpClientErrorException e) {
+            logger.severe("Error 4xx del microservicio: " + e.getStatusCode() + " " + e.getResponseBodyAsString());
+            if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
+                throw new IllegalArgumentException("Error de validación de datos: " + e.getResponseBodyAsString());
+            }
+            throw new RuntimeException("Error en la comunicación con el microservicio: " + e.getMessage(), e);
+
+        } catch (Exception e) {
+            logger.severe("Fallo general de comunicación: " + e.getMessage());
+            throw new RuntimeException("Fallo en la comunicación con el microservicio: " + e.getMessage(), e);
         }
     }
 
