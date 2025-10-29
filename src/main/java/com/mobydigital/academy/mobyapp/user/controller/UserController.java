@@ -17,7 +17,7 @@ import com.mobydigital.academy.mobyapp.user.exception.UserNotFoundException;
 import com.mobydigital.academy.mobyapp.user.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
