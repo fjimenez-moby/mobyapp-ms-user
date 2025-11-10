@@ -9,6 +9,7 @@ import lombok.ToString;
 @ToString
 @Getter
 public class AirtableUserResponse {
+
     private String id;
     private FieldsDTO fields;
 
@@ -20,4 +21,3 @@ public class AirtableUserResponse {
         return fields;
     }
 }
-

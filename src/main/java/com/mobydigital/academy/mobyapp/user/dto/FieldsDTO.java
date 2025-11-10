@@ -32,9 +32,6 @@ public class FieldsDTO {
     @JsonProperty("Localidad")
     private String localidad;
 
-    @JsonProperty("Tecnologia Actual")
-    private String currentTechString;
-
     @JsonProperty("Referente")
     private UserReferenceDTO referente;
 
@@ -46,4 +43,17 @@ public class FieldsDTO {
 
     @JsonProperty("Proyectos")
     private List<String> proyectos;
+
+    @JsonProperty("Direccion")
+    private String address;
+
+    @JsonProperty("Observaciones")
+    private String observation;
+
+    @JsonProperty("Tecnología Actual")
+    private List<String> currentTech;
+
+    @JsonProperty("Historial de Tecnologías")
+    private List<String> techHistory;
+
 }
