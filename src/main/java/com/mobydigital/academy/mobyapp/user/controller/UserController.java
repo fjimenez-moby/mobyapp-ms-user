@@ -2,10 +2,8 @@ package com.mobydigital.academy.mobyapp.user.controller;
 
 import java.util.List;
 
-import com.mobydigital.academy.mobyapp.user.dto.PictureDto;
-import com.mobydigital.academy.mobyapp.user.model.User;
-import coms.dto.UserDTO;
-import coms.dto.UserReferenceDTO;
+import com.mobydigital.academy.mobyapp.user.dto.UserDTO;
+import com.mobydigital.academy.mobyapp.user.dto.UserReferenceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

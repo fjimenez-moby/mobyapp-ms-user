@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+
+import com.mobydigital.academy.mobyapp.user.dto.UserDTO;
 import com.mobydigital.academy.mobyapp.user.model.AirtableMapper;
 import com.mobydigital.academy.mobyapp.user.model.AirtableUserResponse;
-import coms.dto.UserDTO;
-import coms.dto.UserReferenceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -19,6 +19,7 @@ import com.mobydigital.academy.mobyapp.user.exception.TalentPartnerNotFoundExcep
 import com.mobydigital.academy.mobyapp.user.exception.TechnologyNotFoundException;
 import com.mobydigital.academy.mobyapp.user.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
+import com.mobydigital.academy.mobyapp.user.dto.UserReferenceDTO;
 
 @Service
 public class UserService implements IUserService{
@@ -98,8 +99,6 @@ public class UserService implements IUserService{
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put("email", email);
 
-        // Construimos el cuerpo con solo la propiedad a actualizar
-
         HttpHeaders h = new HttpHeaders();
         h.setContentType(MediaType.APPLICATION_JSON);
         Map<String, String> body = Map.of("pictureUrl", pictureUrl);
@@ -153,6 +152,7 @@ public class UserService implements IUserService{
 		throw new TalentPartnerNotFoundException("Unimplemented method 'getAllTalentPartners'");
 	}
 
+    //Verificar si va a andar
 	@Override
 	public List<UserReferenceDTO> getByTechnology(String technology) throws TechnologyNotFoundException {
 		String urlTechnology = urlBase + "tecno?tec={technology}";

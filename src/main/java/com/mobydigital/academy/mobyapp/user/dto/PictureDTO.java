@@ -4,6 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter@Setter
-public class PictureDto {
+public class PictureDTO {
     private String url;
 }
