@@ -1,7 +1,7 @@
 package com.mobydigital.academy.mobyapp.user.model;
 
 import com.mobydigital.academy.mobyapp.user.dto.FieldsDTO;
-import coms.dto.UserDTO;
+import com.mobydigital.academy.mobyapp.user.dto.UserDTO;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
@@ -34,8 +34,14 @@ public class AirtableMapper {
         if (f.getLocalidad() != null && !f.getLocalidad().isBlank()) {
             dto.setLocality(f.getLocalidad());
         }
-        if (f.getCurrentTechString() != null && !f.getCurrentTechString().isBlank()) {
-            dto.setCurrentTech(f.getCurrentTechString());
+        if (f.getTecnologiaActual() != null && !f.getHistorialTecnologias().isEmpty()) {
+            dto.setCurrentTech(f.getTecnologiaActual());
+        }
+        if (f.getDireccion() != null && !f.getDireccion().isBlank()) {
+            dto.setAddress(f.getDireccion());
+        }
+        if (f.getObservacion() != null && !f.getObservacion().isBlank()) {
+            dto.setObservation(f.getObservacion());
         }
         dto.setReferent(f.getReferente());
         dto.setTalentPartner(f.getTalentPartner());

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import java.util.List;
-import coms.dto.UserReferenceDTO;
 
 @Getter
 @Setter
@@ -45,15 +44,15 @@ public class FieldsDTO {
     private List<String> proyectos;
 
     @JsonProperty("Direccion")
-    private String address;
+    private String direccion;
 
     @JsonProperty("Observaciones")
-    private String observation;
+    private String observacion;
 
     @JsonProperty("Tecnología Actual")
-    private List<String> currentTech;
+    private List<String> tecnologiaActual;
 
     @JsonProperty("Historial de Tecnologías")
-    private List<String> techHistory;
+    private List<String> historialTecnologias;
 
 }
