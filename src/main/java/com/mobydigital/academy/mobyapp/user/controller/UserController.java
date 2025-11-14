@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 
-@Tag(name = "Candidates",description = "Manage candidates in the voting system (CRUD operations)")
+@Tag(name = "User",description = "Manejo de los usuarios dentro de la aplicacion")
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
