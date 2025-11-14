@@ -17,7 +17,7 @@ public class OpenApi {
                         .title("API User")
                         .version("1.0")
                         .description("""
-                                REST API para la gestión de projectos del sistema. 
+                                REST API para la gestión de usuarios del sistema. 
                                 Incluye operaciones CRUD, búsqueda y validación de credenciales.
                                 """)
                         .contact(new Contact()
